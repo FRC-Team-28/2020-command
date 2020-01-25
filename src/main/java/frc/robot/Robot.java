@@ -25,6 +25,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static MacanumDrive macanumDrive;
+  public static Limelight limelight;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     macanumDrive = new MacanumDrive();
+    limelight = new Limelight();
   }
 
   /**

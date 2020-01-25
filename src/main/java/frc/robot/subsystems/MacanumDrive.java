@@ -30,6 +30,13 @@ public class MacanumDrive extends Subsystem {
     setDefaultCommand(new Drive());
   }
 
+  public void set(double forwardInput, double lateralInput, double rotation){
+    setFrontLeft(forwardInput, lateralInput, rotation);
+    setFrontRight(forwardInput, lateralInput, rotation);
+    setBackLeft(forwardInput, lateralInput, rotation);
+    setBackRight(forwardInput, lateralInput, rotation);
+  }
+
   public void setFrontLeft(double forwardInput, double lateralInput, double rotation)
   {
       fL.set(-1 * (forwardInput - lateralInput - rotation));

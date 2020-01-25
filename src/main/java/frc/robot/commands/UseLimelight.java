@@ -7,15 +7,16 @@
 
 package frc.robot.commands;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Drive extends Command {
-  public Drive() {
+public class UseLimelight extends Command {
+  public UseLimelight() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.macanumDrive);
-
+    requires(Robot.limelight);
   }
 
   // Called just before this Command runs the first time
@@ -25,36 +26,38 @@ public class Drive extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
-    double leftStickY = Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y);
-    double leftStickX = Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_X);
-    double triggerValue = Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_TRIGGER) - Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_TRIGGER);
+  protected void execute() {
 
-    Robot.macanumDrive.set(leftStickY, leftStickX, triggerValue);
+    double x = Robot.limelight.getNetworkTableEntry("tx");
+    double kP = 0.1;
+
+    Robot.macanumDrive.set(0,0,x * kP);
+    
+
+    System.out.println(x);
+
+    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(Robot.m_oi.getDriverButton(RobotMap.A_BUTTON))
+      return false;
+    else
+      return true;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() 
-  {
-    Robot.macanumDrive.setFrontLeft(0,0,0);
-    Robot.macanumDrive.setFrontRight(0,0,0);
-    Robot.macanumDrive.setBackLeft(0,0,0);
-    Robot.macanumDrive.setBackRight(0,0,0);
+  protected void end() {
+    System.out.println("OFF");
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() 
-  {
-    this.end();
+  protected void interrupted() {
   }
 }

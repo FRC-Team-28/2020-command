@@ -11,27 +11,29 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Drive extends Command {
-  public Drive() {
+public class Limelightidle extends Command {
+  public Limelightidle() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.macanumDrive);
-
+    requires(Robot.limelight);
   }
+
+  UseLimelight useLimelight;
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    useLimelight = new UseLimelight();  
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
-    double leftStickY = Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y);
-    double leftStickX = Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_X);
-    double triggerValue = Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_TRIGGER) - Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_TRIGGER);
+  protected void execute() {
 
-    Robot.macanumDrive.set(leftStickY, leftStickX, triggerValue);
+    if(Robot.m_oi.getDriverButton(RobotMap.A_BUTTON))
+    {
+      useLimelight.start();
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,19 +44,12 @@ public class Drive extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() 
-  {
-    Robot.macanumDrive.setFrontLeft(0,0,0);
-    Robot.macanumDrive.setFrontRight(0,0,0);
-    Robot.macanumDrive.setBackLeft(0,0,0);
-    Robot.macanumDrive.setBackRight(0,0,0);
+  protected void end() {
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() 
-  {
-    this.end();
+  protected void interrupted() {
   }
 }
