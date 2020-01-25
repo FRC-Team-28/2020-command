@@ -10,6 +10,7 @@ package frc.robot.commands;
 import javax.lang.model.util.ElementScanner6;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.PID;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -19,9 +20,12 @@ public class UseLimelight extends Command {
     requires(Robot.limelight);
   }
 
+  PID pid;
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    pid = new PID(.05,0.05,.12,0,0);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -29,14 +33,11 @@ public class UseLimelight extends Command {
   protected void execute() {
 
     double x = Robot.limelight.getNetworkTableEntry("tx");
-    double kP = 0.1;
-
-    Robot.macanumDrive.set(0,0,x * kP);
+    Robot.macanumDrive.set(0,0,-pid.update(x));
     
 
     System.out.println(x);
 
-    
 
   }
 
