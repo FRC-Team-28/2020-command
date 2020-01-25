@@ -25,13 +25,6 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static MacanumDrive macanumDrive;
-  public static Lift broom;
-  public static Arm arm;
-  public static Elevator elevator;
-  public static Wrist wrist;
-  public static Vacuum succ;
-
-  
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
