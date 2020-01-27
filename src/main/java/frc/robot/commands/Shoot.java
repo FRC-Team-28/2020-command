@@ -8,50 +8,37 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.PID;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class UseLimelight extends Command {
-  public UseLimelight() {
+public class Shoot extends Command {
+  public Shoot() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.limelight);
+    // eg. requires(chassis);
   }
-
-  PID pid;
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    pid = new PID(.05,0.05,.12,0,0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    double x = Robot.limelight.getNetworkTableEntry("tx");
-    Robot.macanumDrive.set(0,0,-pid.update(x));
-    
-
-    System.out.println(x);
-
+    //Code from Shooter subsystem to shoot BALLLSBALABALSLS
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.m_oi.getDriverButton(RobotMap.A_BUTTON))
-      return false;
-    else
-      return true;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    System.out.println("OFF");
   }
 
   // Called when another command which requires one or more of the same
