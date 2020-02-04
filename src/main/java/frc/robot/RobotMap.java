@@ -42,18 +42,8 @@ public class RobotMap {
 
       //DIO  Wryyyy
       public static final int 
-      FL_ENC_A = 0, 
-      FL_ENC_B = 1, 
-      FR_ENC_A = 2, 
-      FR_ENC_B = 3,
-      BL_ENC_A = 4, 
-      BL_ENC_B = 5, 
-      BR_ENC_A = 6, 
-      BR_ENC_B = 7, 
-      VAC_SWITCH = 10, 
-      UP_LIM = 11, 
-      DOWN_LIM = 12,
-      MAGNETIC_SENSOR = 0;
+      MAGNETIC_SENSOR = 0,
+      SPRING_SENSOR = 1;
 
 
   public static final int LEFT_STICK_X = 0;

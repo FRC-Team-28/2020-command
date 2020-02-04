@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.PID;
 import frc.robot.RobotMap;
-import frc.robot.commands.Shooteridle;
 
 /**
  * Add your docs here.
@@ -33,7 +32,7 @@ public class Shooter extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new Shooteridle());
+    //  setDefaultCommand(new Shooteridle());
  
  
   }

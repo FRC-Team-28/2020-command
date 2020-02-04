@@ -11,7 +11,6 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.Limelightidle;
 import frc.robot.commands.UseLimelight;
 
 /**
@@ -47,6 +46,6 @@ public class Limelight extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new Limelightidle());
+    // setDefaultCommand(new Limelightidle());
   }
 }

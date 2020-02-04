@@ -13,7 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.UseLimelight;
 import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +32,10 @@ public class Robot extends TimedRobot {
   public static WaterWheel waterWheel;
 
   Command m_autonomousCommand;
+  Command useLimelight;
+  Command aim;
+  Command shoot;
+  Command moveWaterWheel;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
@@ -39,10 +45,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    //subsystems
     macanumDrive = new MacanumDrive();
     limelight = new Limelight();
     shooter = new Shooter();
     waterWheel = new WaterWheel();
+    //commands
+    useLimelight = new UseLimelight();
+    aim = new Aim();
+    shoot = new Shoot();
   }
 
   /**
@@ -124,6 +135,22 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
+    if(m_oi.getDriverButton(RobotMap.A_BUTTON))
+    {
+      useLimelight.start();
+    }
+
+    if(m_oi.getAuxillaryRawAxis(RobotMap.LEFT_TRIGGER) > 0.1)
+    {
+      aim.start();
+    }
+    if(m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
+    {
+      shoot.start();
+    }
+
+
   }
 
   /**

@@ -27,10 +27,10 @@ public class MoveWaterWheel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(!Robot.waterWheel.getSensor())
+    if(!Robot.waterWheel.getMagneticSensor())
       notYetMoved = false;
 
-    if(!notYetMoved && Robot.waterWheel.getSensor())
+    if(!notYetMoved && Robot.waterWheel.getMagneticSensor())
       Robot.waterWheel.setSpeed(0);
     else
       Robot.waterWheel.setSpeed(0.1);
@@ -39,7 +39,7 @@ public class MoveWaterWheel extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.waterWheel.getSensor() && !notYetMoved)
+    if(Robot.waterWheel.getMagneticSensor() && !notYetMoved)
       return true;
     else
       return false;

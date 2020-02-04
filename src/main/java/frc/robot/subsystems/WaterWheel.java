@@ -23,6 +23,7 @@ public class WaterWheel extends Subsystem {
 
   TalonSRX waterWheel = new TalonSRX(RobotMap.WATER_WHEEL);
   DigitalInput magneticSensor = new DigitalInput(RobotMap.MAGNETIC_SENSOR);
+  DigitalInput springSensor = new DigitalInput(RobotMap.SPRING_SENSOR);
 
   public void setSpeed(double speed)
   {
@@ -30,14 +31,19 @@ public class WaterWheel extends Subsystem {
     //waterWheel.set(ControlMode.PercentOutput, speed);
   }
 
-  public boolean getSensor()
+  public boolean getMagneticSensor()
   {
     return magneticSensor.get();
+  }
+
+  public boolean getSpringSensor()
+  {
+    return springSensor.get();
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new MoveWaterWheel());
+    //setDefaultCommand(new MoveWaterWheel());
   }
 }
