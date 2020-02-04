@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Shoot extends Command {
-  public Shoot() {
+public class Aim extends Command {
+  public Aim() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.shooter);
   }
+
+  public static final double TARGET_HEIGHT = 59;
 
   // Called just before this Command runs the first time
   @Override
@@ -26,14 +28,20 @@ public class Shoot extends Command {
   @Override
   protected void execute() {
 
-    //Code from Shooter subsystem to shoot BALLLSBALABALSLS
+    Robot.shooter.moveWheel(1);
+    System.out.println(Robot.limelight.getY() + " , " + calcDistance());
 
+  }
+
+  public static double calcDistance()
+  {
+    return (TARGET_HEIGHT - RobotMap.CAMERA_HEIGHT) / Math.tan(Math.PI/180 * (RobotMap.CAMERA_ANGLE + Robot.limelight.getY()));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
+    if(Robot.m_oi.getAuxillaryRawAxis(RobotMap.LEFT_TRIGGER) > 0.1)
     {
       return false;
     }

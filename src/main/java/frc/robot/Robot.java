@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
   public static MacanumDrive macanumDrive;
   public static Limelight limelight;
   public static Shooter shooter;
+  public static WaterWheel waterWheel;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
     macanumDrive = new MacanumDrive();
     limelight = new Limelight();
     shooter = new Shooter();
+    waterWheel = new WaterWheel();
   }
 
   /**

@@ -9,41 +9,46 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class Shoot extends Command {
-  public Shoot() {
+public class MoveWaterWheel extends Command {
+  public MoveWaterWheel() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.shooter);
+    requires(Robot.waterWheel);
   }
+
+  boolean notYetMoved;
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    notYetMoved = true;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(!Robot.waterWheel.getSensor())
+      notYetMoved = false;
 
-    //Code from Shooter subsystem to shoot BALLLSBALABALSLS
-
+    if(!notYetMoved && Robot.waterWheel.getSensor())
+      Robot.waterWheel.setSpeed(0);
+    else
+      Robot.waterWheel.setSpeed(0.1);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
-    {
-      return false;
-    }
-    else
+    if(Robot.waterWheel.getSensor() && !notYetMoved)
       return true;
+    else
+      return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.waterWheel.setSpeed(0);
   }
 
   // Called when another command which requires one or more of the same

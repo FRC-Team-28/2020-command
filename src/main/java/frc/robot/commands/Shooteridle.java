@@ -11,34 +11,42 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Shoot extends Command {
-  public Shoot() {
+public class Shooteridle extends Command {
+  public Shooteridle() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.shooter);
   }
 
+  Aim aim;
+  Shoot shoot;
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    aim = new Aim();  
+    shoot = new Shoot();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    //Code from Shooter subsystem to shoot BALLLSBALABALSLS
+    if(Robot.m_oi.getAuxillaryRawAxis(RobotMap.LEFT_TRIGGER) > 0.1)
+    {
+      aim.start();
+    }
+    if(Robot.m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
+    {
+      shoot.start();
+    }
 
   }
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
-    {
-      return false;
-    }
-    else
-      return true;
+    return false;
   }
 
   // Called once after isFinished returns true

@@ -9,32 +9,35 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.PID;
 import frc.robot.RobotMap;
-import frc.robot.commands.Shooteridle;
+import frc.robot.commands.MoveWaterWheel;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
  */
-public class Shooter extends Subsystem {
+public class WaterWheel extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  PID pid = new PID(0,0,0,0);
-  TalonSRX shooterWheel = new TalonSRX(RobotMap.SHOOTER_WHEEL);
 
-  public void moveWheel(int speed)
+  TalonSRX waterWheel = new TalonSRX(RobotMap.WATER_WHEEL);
+  DigitalInput magneticSensor = new DigitalInput(RobotMap.MAGNETIC_SENSOR);
+
+  public void setSpeed(double speed)
   {
     //UNCOMMENT WHEN PART READY
-    //shooterWheel.set(ControlMode.PercentOutput, pid.update(speed));
+    //waterWheel.set(ControlMode.PercentOutput, speed);
+  }
+
+  public boolean getSensor()
+  {
+    return magneticSensor.get();
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new Shooteridle());
- 
- 
+    setDefaultCommand(new MoveWaterWheel());
   }
 }

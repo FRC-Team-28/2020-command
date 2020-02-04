@@ -15,6 +15,12 @@ package frc.robot;
  */
 public class RobotMap {
 
+      //SHOOTING STUFF
+      public static final double
+      CAMERA_ANGLE = 3,
+      CAMERA_HEIGHT = 32;
+
+
       //ANALOG
       public static final int
       GYRO_PIN = 1, 
@@ -23,7 +29,8 @@ public class RobotMap {
       
       //TALONS
       public static final int
-      SHOOTER_WHEEL = 0;
+      SHOOTER_WHEEL = 0,
+      WATER_WHEEL = 0;
 
 
       //SPARK/PWM 
@@ -45,7 +52,9 @@ public class RobotMap {
       BR_ENC_B = 7, 
       VAC_SWITCH = 10, 
       UP_LIM = 11, 
-      DOWN_LIM = 12;
+      DOWN_LIM = 12,
+      MAGNETIC_SENSOR = 0;
+
 
   public static final int LEFT_STICK_X = 0;
 	public static final int LEFT_STICK_Y = 1;

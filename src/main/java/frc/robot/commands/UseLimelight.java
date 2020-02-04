@@ -14,7 +14,7 @@ import frc.robot.RobotMap;
 
 public class UseLimelight extends Command {
   public UseLimelight() {
-    // Use requires() here to declare subsystem dependencies
+    // Use requires() here to declare subsystem dependentestcies
     requires(Robot.limelight);
   }
 
@@ -23,7 +23,9 @@ public class UseLimelight extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    pid = new PID(.05,0.05,.12,0,0);
+    //pid = new PID(.05,0.05,.12,0);
+    pid = new PID(.05,0,0,0);
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -31,7 +33,7 @@ public class UseLimelight extends Command {
   protected void execute() {
 
     double x = Robot.limelight.getNetworkTableEntry("tx");
-    Robot.macanumDrive.set(0,0,-pid.update(x));
+    Robot.macanumDrive.set(Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y),Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_X),-pid.update(x));
     
 
     System.out.println(x);
