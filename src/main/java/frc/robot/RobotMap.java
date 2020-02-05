@@ -43,7 +43,13 @@ public class RobotMap {
       //DIO  Wryyyy
       public static final int 
       MAGNETIC_SENSOR = 0,
-      SPRING_SENSOR = 1;
+      SPRING_SENSOR1 = 1,
+      SPRING_SENSOR2 = 1,
+      SPRING_SENSOR3 = 1,
+      SPRING_SENSOR4 = 1,
+      SPRING_SENSOR5 = 1,
+      SPRING_SENSOR6 = 1;
+
 
 
   public static final int LEFT_STICK_X = 0;

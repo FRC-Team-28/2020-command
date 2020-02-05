@@ -45,11 +45,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+
     //subsystems
     macanumDrive = new MacanumDrive();
     limelight = new Limelight();
     shooter = new Shooter();
     waterWheel = new WaterWheel();
+    
     //commands
     useLimelight = new UseLimelight();
     aim = new Aim();
@@ -150,6 +152,12 @@ public class Robot extends TimedRobot {
       shoot.start();
     }
 
+    if(m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
+    {
+      aim.start();
+      if(waterWheel.ballCounter() > 0)
+        moveWaterWheel.start();
+    }
 
   }
 
