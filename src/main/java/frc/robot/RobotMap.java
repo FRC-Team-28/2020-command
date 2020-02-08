@@ -29,7 +29,7 @@ public class RobotMap {
       
       //TALONS
       public static final int
-      SHOOTER_WHEEL = 0,
+      SHOOTER_WHEEL = 1,
       WATER_WHEEL = 0;
 
 

@@ -9,6 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -36,6 +38,7 @@ public class Robot extends TimedRobot {
   Command aim;
   Command shoot;
   Command moveWaterWheel;
+  CommandGroup auto;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
@@ -50,12 +53,13 @@ public class Robot extends TimedRobot {
     macanumDrive = new MacanumDrive();
     limelight = new Limelight();
     shooter = new Shooter();
-    waterWheel = new WaterWheel();
+    //waterWheel = new WaterWheel();
     
     //commands
     useLimelight = new UseLimelight();
     aim = new Aim();
     shoot = new Shoot();
+    auto = new Auto();
   }
 
   /**
@@ -85,7 +89,7 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * This autonomous (along with the chooser code above) shows how to select
+   * This autonomous (along with the chooser code above) shows hAow to select
    * between different autonomous modes using the dashboard. The sendable
    * chooser code works with the Java SmartDashboard. If you prefer the
    * LabVIEW Dashboard, remove all of the chooser code and uncomment the
@@ -110,6 +114,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
+
+    auto.start();
+
   }
 
   /**
@@ -118,6 +125,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+
   }
 
   @Override
@@ -155,8 +163,9 @@ public class Robot extends TimedRobot {
     if(m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
     {
       aim.start();
-      if(waterWheel.ballCounter() > 0)
-        moveWaterWheel.start();
+      //if(waterWheel.ballCounter() > 0)
+        //moveWaterWheel.start();
+
     }
 
   }

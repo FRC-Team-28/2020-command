@@ -8,56 +8,51 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.PID;
 
-public class Aim extends Command {
-  public Aim() {
+public class DriveDuringAuto extends Command {
+  private long runTime;
+  private long startTime;
+  private long endTime;
+  private double forwardSpeed, lateralSpeed, rotationSpeed;
+  public DriveDuringAuto(long time, double forwardSpeed, double lateralSpeed, double rotationSpeed) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.shooter);
+    runTime = time;
+    this.forwardSpeed = forwardSpeed;
+    this.lateralSpeed = lateralSpeed;
+    this.rotationSpeed = rotationSpeed;
+
+    requires(Robot.macanumDrive);
   }
-
-  PID pid;
-
-  public static final double TARGET_HEIGHT = 59;
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    pid = new PID(SmartDashboard.getNumber("kP", 0),0,0,0);
+    System.out.println("Starting Auto");
+    startTime = System.currentTimeMillis();
+    endTime = startTime + runTime; //runTime is in milliseconds
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.shooter.moveWheel(pid.update(Robot.shooter.getEncoderValues()[0]));
-    System.out.println(Robot.shooter.getEncoderValues()[0] + " , " + Robot.shooter.getEncoderValues()[1]);
-    
-
-  }
-
-  public static double calcDistance()
-  {
-    return (TARGET_HEIGHT - RobotMap.CAMERA_HEIGHT) / Math.tan(Math.PI/180 * (RobotMap.CAMERA_ANGLE + Robot.limelight.getY()));
+    Robot.macanumDrive.set(forwardSpeed, lateralSpeed, rotationSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.m_oi.getAuxillaryRawAxis(RobotMap.LEFT_TRIGGER) > 0.1)
-    {
-      return false;
-    }
-    else
+    if(System.currentTimeMillis() >= endTime)
       return true;
+    else
+      return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.macanumDrive.set(0, 0, 0);
+    System.out.println("Auto Complete");
   }
 
   // Called when another command which requires one or more of the same

@@ -23,7 +23,7 @@ public class WaterWheel extends Subsystem {
 
   TalonSRX waterWheel = new TalonSRX(RobotMap.WATER_WHEEL);
   DigitalInput magneticSensor = new DigitalInput(RobotMap.MAGNETIC_SENSOR);
-  DigitalInput[] springSensor = {new DigitalInput(RobotMap.SPRING_SENSOR1),new DigitalInput(RobotMap.SPRING_SENSOR2),new DigitalInput(RobotMap.SPRING_SENSOR3),
+  DigitalInput springSensor[] = {new DigitalInput(RobotMap.SPRING_SENSOR1),new DigitalInput(RobotMap.SPRING_SENSOR2),new DigitalInput(RobotMap.SPRING_SENSOR3),
                                  new DigitalInput(RobotMap.SPRING_SENSOR4),new DigitalInput(RobotMap.SPRING_SENSOR5),new DigitalInput(RobotMap.SPRING_SENSOR6)};
 
 
@@ -37,7 +37,7 @@ public class WaterWheel extends Subsystem {
   public int ballCounter()
   {
     int count = 0;
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < springSensor.length; i++)
     {
       if(springSensor[i].get())
         count++;
