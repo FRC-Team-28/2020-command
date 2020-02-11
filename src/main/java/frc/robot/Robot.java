@@ -35,7 +35,6 @@ public class Robot extends TimedRobot {
 
   Command m_autonomousCommand;
   Command useLimelight;
-  Command aim;
   Command shoot;
   Command moveWaterWheel;
   CommandGroup auto;
@@ -57,7 +56,6 @@ public class Robot extends TimedRobot {
     
     //commands
     useLimelight = new UseLimelight();
-    aim = new Aim();
     shoot = new Shoot();
     auto = new Auto();
   }
@@ -151,21 +149,9 @@ public class Robot extends TimedRobot {
       useLimelight.start();
     }
 
-    if(m_oi.getAuxillaryRawAxis(RobotMap.LEFT_TRIGGER) > 0.1)
-    {
-      aim.start();
-    }
     if(m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
     {
       shoot.start();
-    }
-
-    if(m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
-    {
-      aim.start();
-      //if(waterWheel.ballCounter() > 0)
-        //moveWaterWheel.start();
-
     }
 
   }

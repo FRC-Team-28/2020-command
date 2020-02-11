@@ -15,40 +15,34 @@ package frc.robot;
  */
 public class RobotMap {
 
-      //SHOOTING STUFF
-      public static final double
-      CAMERA_ANGLE = 3,
-      CAMERA_HEIGHT = 32;
+  //LIMELIGHT VALUES
+  public static final double
+  CAMERA_ANGLE = 3,
+  CAMERA_HEIGHT = 32;
+  
+  //TALONS
+  public static final int
+  SHOOTER_WHEEL_LEFT = 1,
+  SHOOTER_WHEEL_RIGHT = 2,
+  WATER_WHEEL = 0;
 
 
-      //ANALOG
-      public static final int
-      GYRO_PIN = 1, 
-      ARM_POT = 2, 
-      ELEVATOR_SWITCH = 3;
-      
-      //TALONS
-      public static final int
-      SHOOTER_WHEEL = 1,
-      WATER_WHEEL = 0;
+  //SPARK/PWM 
+  public static final int 
+  FL_MOTOR = 3, 
+  FR_MOTOR = 2, 
+  BR_MOTOR = 0, 
+  BL_MOTOR = 1;
 
-
-      //SPARK/PWM 
-      public static final int 
-      FL_MOTOR = 3, 
-      FR_MOTOR = 2, 
-      BR_MOTOR = 0, 
-      BL_MOTOR = 1;
-
-      //DIO  Wryyyy
-      public static final int 
-      MAGNETIC_SENSOR = 0,
-      SPRING_SENSOR1 = 1,
-      SPRING_SENSOR2 = 1,
-      SPRING_SENSOR3 = 1,
-      SPRING_SENSOR4 = 1,
-      SPRING_SENSOR5 = 1,
-      SPRING_SENSOR6 = 1;
+  //DIO  Wryyyy
+  public static final int 
+  MAGNETIC_SENSOR = 0,
+  SPRING_SENSOR1 = 1,
+  SPRING_SENSOR2 = 2,
+  SPRING_SENSOR3 = 3,
+  SPRING_SENSOR4 = 4,
+  SPRING_SENSOR5 = 5,
+  SPRING_SENSOR6 = 6;
 
 
 

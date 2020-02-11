@@ -19,6 +19,8 @@ public class MacanumDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+
+  //TODO - Change this to TalonFX objects
   private Spark bL = new Spark(RobotMap.BL_MOTOR);
 	private Spark bR = new Spark(RobotMap.BR_MOTOR);
 	private Spark fL = new Spark(RobotMap.FL_MOTOR);

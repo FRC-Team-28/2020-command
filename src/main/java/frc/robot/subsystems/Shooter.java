@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.PID;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -23,25 +24,29 @@ import frc.robot.RobotMap;
 public class Shooter extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  
   PID pid = new PID(0,0,0,0);
-  //TalonSRX shooterWheel = new TalonSRX(RobotMap.SHOOTER_WHEEL);
-  TalonFX shootController1 = new TalonFX(RobotMap.SHOOTER_WHEEL);
-  TalonFX shootController2 = new TalonFX(8);
+
+  TalonFX shootControllerLeft = new TalonFX(RobotMap.SHOOTER_WHEEL_LEFT);
+  TalonFX shootControllerRight = new TalonFX(RobotMap.SHOOTER_WHEEL_RIGHT);
+
+  TalonFXSensorCollection sensorLeft = new TalonFXSensorCollection(shootControllerLeft);
+  TalonFXSensorCollection sensorRight = new TalonFXSensorCollection(shootControllerRight);
 
 
-  public void moveWheel(double speed)
+  //TODO: rewrite this to reflect the fact that we have two wheels
+  //also maybe write it so that the PID is in this class, not in Aim.java
+  public void moveWheel(double leftSpeed, double rightSpeed)
   {
-    //UNCOMMENT WHEN PART READY
-    //shooterWheel.set(ControlMode.PercentOutput, pid.update(speed));
-    shootController1.set(ControlMode.PercentOutput, speed);
-    shootController2.set(ControlMode.PercentOutput, speed);
+    shootControllerLeft.set(ControlMode.PercentOutput, leftSpeed);
+    shootControllerRight.set(ControlMode.PercentOutput, rightSpeed);
   }
 
   public double[] getEncoderValues()
   {
-    TalonFXSensorCollection sensor1 = new TalonFXSensorCollection(shootController1);
-    TalonFXSensorCollection sensor2 = new TalonFXSensorCollection(shootController2);
-    double [] output = {sensor1.getIntegratedSensorVelocity(), sensor2.getIntegratedSensorVelocity()};
+    TalonFXSensorCollection sensorLeft = new TalonFXSensorCollection(shootControllerLeft);
+    TalonFXSensorCollection sensorRight = new TalonFXSensorCollection(shootControllerRight);
+    double [] output = {sensorLeft.getIntegratedSensorVelocity(), sensorRight.getIntegratedSensorVelocity()};
     return output;
   }
 
