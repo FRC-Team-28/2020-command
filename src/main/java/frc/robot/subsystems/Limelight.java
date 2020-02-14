@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.UseLimelight;
 
 /**
- * Add your docs here.
+ * Limelight subsystem. includes all the methods to get the raw limelight values
  */
 public class Limelight extends Subsystem {
   // Put methods for controlling this subsystem
@@ -27,16 +27,28 @@ public class Limelight extends Subsystem {
     return table.getEntry(entry).getDouble(0.0);
   }
 
+  /**
+   * gets the y value from the limelight, which represents the angle between the center of the camera and the center of the target in the y direction
+   * @return the angle in degrees of the between the center of the camera and the center of the target in the vertical direction
+   */
   public double getY()
   {
     return table.getEntry("ty").getDouble(0.0);
   }
 
+  /**
+   * gets the y value from the limelight, which represents the angle between the center of the camera and the center of the target in the x direction
+   * @return the angle in degrees of the between the center of the camera and the center of the target in the horizontal direction
+   */
   public double getX()
   {
     return table.getEntry("tx").getDouble(0.0);
   }
 
+  /**
+   * gets the "area" of the target.
+   * @return The "area" of the target in percent of total image. Values range from 0 for no target to 100 for the target occupying all of the camera space.
+   */
   public double getA()
   {
     return table.getEntry("ta").getDouble(0.0);

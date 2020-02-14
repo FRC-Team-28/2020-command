@@ -42,6 +42,10 @@ public class Shoot extends Command {
 
   }
 
+  /**
+   * calculates distance to target based on the limelight's y value
+   * @return the distance to the target in watever units we supply for the heights
+   */
   public static double calcDistance()
   {
     return (TARGET_HEIGHT - RobotMap.CAMERA_HEIGHT) / Math.tan(Math.PI/180 * (RobotMap.CAMERA_ANGLE + Robot.limelight.getY()));
@@ -61,6 +65,7 @@ public class Shoot extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.shooter.moveWheel(0, 0);
   }
 
   // Called when another command which requires one or more of the same

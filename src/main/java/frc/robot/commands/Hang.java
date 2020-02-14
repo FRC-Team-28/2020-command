@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Drive extends Command {
-  public Drive() {
+public class Hang extends Command {
+  public Hang() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.macanumDrive);
-
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -25,33 +24,28 @@ public class Drive extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
-    double leftStickY = Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y);
-    double leftStickX = Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_X);
-    double triggerValue = Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_TRIGGER) - Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_TRIGGER);
-
-    Robot.macanumDrive.set(leftStickY, leftStickX, triggerValue);
+  protected void execute() {
+    Robot.elevator.moveMotors(Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_Y));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_Y) > 0.1)
+      return false;
+    else
+      return true;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() 
-  {
-    Robot.macanumDrive.set(0,0,0);
+  protected void end() {
+    Robot.elevator.moveMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() 
-  {
-    this.end();
+  protected void interrupted() {
   }
 }

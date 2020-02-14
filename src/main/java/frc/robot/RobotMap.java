@@ -20,12 +20,16 @@ public class RobotMap {
   CAMERA_ANGLE = 3,
   CAMERA_HEIGHT = 32;
   
-  //TALONS
+  //Falcon500s
   public static final int
   SHOOTER_WHEEL_LEFT = 1,
   SHOOTER_WHEEL_RIGHT = 2,
   WATER_WHEEL = 0;
 
+  //Talons
+  public static final int 
+  ELEVATOR_LEFT = 3,
+  ELEVATOR_RIGHT = 4;
 
   //SPARK/PWM 
   public static final int 

@@ -19,7 +19,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * subsystem for the shooter
  */
 public class Shooter extends Subsystem {
   // Put methods for controlling this subsystem
@@ -36,12 +36,21 @@ public class Shooter extends Subsystem {
 
   //TODO: rewrite this to reflect the fact that we have two wheels
   //also maybe write it so that the PID is in this class, not in Aim.java
+  /**
+   * sets the speed of the shooter wheels
+   * @param leftSpeed speed of left wheel, range -1 to 1
+   * @param rightSpeed speed of right wheel, range -1 to 1
+   */
   public void moveWheel(double leftSpeed, double rightSpeed)
   {
     shootControllerLeft.set(ControlMode.PercentOutput, leftSpeed);
     shootControllerRight.set(ControlMode.PercentOutput, rightSpeed);
   }
 
+  /**
+   * gets the rates of the built in talon encoders according to TalonFXSensorCollection.getIntegratedSensorVelocity()
+   * @return an array of exactly two values where the left value is index 0 and the right value is index 1
+   */
   public double[] getEncoderValues()
   {
     TalonFXSensorCollection sensorLeft = new TalonFXSensorCollection(shootControllerLeft);

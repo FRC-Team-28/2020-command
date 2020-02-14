@@ -13,7 +13,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.Drive;
 
 /**
- * Add your docs here.
+ * Scottish mecanum drive subsystem
  */
 public class MacanumDrive extends Subsystem {
   // Put methods for controlling this subsystem
@@ -32,6 +32,12 @@ public class MacanumDrive extends Subsystem {
     setDefaultCommand(new Drive());
   }
 
+  /**
+   * sets all the motor speeds, drives the robot
+   * @param forwardInput range from -1 to 1, positive is forwards
+   * @param lateralInput range from -1 to 1, positive is right
+   * @param rotation range from -1 to 1, positive is clockwise (right)
+   */
   public void set(double forwardInput, double lateralInput, double rotation){
     setFrontLeft(forwardInput, lateralInput, rotation);
     setFrontRight(forwardInput, lateralInput, rotation);
@@ -39,22 +45,22 @@ public class MacanumDrive extends Subsystem {
     setBackRight(forwardInput, lateralInput, rotation);
   }
 
-  public void setFrontLeft(double forwardInput, double lateralInput, double rotation)
+  private void setFrontLeft(double forwardInput, double lateralInput, double rotation)
   {
       fL.set(-1 * (forwardInput - lateralInput - rotation));
   }
 
-  public void setFrontRight(double forwardInput, double lateralInput, double rotation)
+  private void setFrontRight(double forwardInput, double lateralInput, double rotation)
   {
       fR.set(forwardInput + lateralInput + rotation);
   }
 
-  public void setBackLeft(double forwardInput, double lateralInput, double rotation)
+  private void setBackLeft(double forwardInput, double lateralInput, double rotation)
   {
       bL.set(-1 * (forwardInput + lateralInput - rotation));
   }
 
-  public void setBackRight(double forwardInput, double lateralInput, double rotation)
+  private void setBackRight(double forwardInput, double lateralInput, double rotation)
   {
       bR.set(forwardInput - lateralInput + rotation);
   }

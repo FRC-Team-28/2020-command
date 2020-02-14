@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Add your docs here.
+ * The subsystem for the waterwheel
  */
 public class WaterWheel extends Subsystem {
   // Put methods for controlling this subsystem
@@ -27,13 +27,20 @@ public class WaterWheel extends Subsystem {
                                  new DigitalInput(RobotMap.SPRING_SENSOR4),new DigitalInput(RobotMap.SPRING_SENSOR5),new DigitalInput(RobotMap.SPRING_SENSOR6)};
 
 
-
+  /**
+   * directly sets the speed of the waterwheel. You probably don't want to use this. Use the MoveWaterWheel command instead.
+   * @param speed the speed of the water wheel. range -1 to 1.
+   */
   public void setSpeed(double speed)
   {
     //UNCOMMENT WHEN PART READY
     //waterWheel.set(ControlMode.PercentOutput, speed);
   }
 
+  /**
+   * gets the number of balls currently in the shhoter. calculated by counting the number of ball sensors that are on.
+   * @return the number of balls in the shooter
+   */
   public int ballCounter()
   {
     int count = 0;
@@ -45,8 +52,10 @@ public class WaterWheel extends Subsystem {
     return count;
   }
 
-
-  
+  /**
+   * gets the value from the magnetic sensor on the waterwheel
+   * @return the value straight from the magnetic sensor on the waterwheel. True when magnet is present
+   */
   public boolean getMagneticSensor()
   {
     return magneticSensor.get();

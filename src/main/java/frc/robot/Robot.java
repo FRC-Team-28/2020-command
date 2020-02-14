@@ -32,11 +32,13 @@ public class Robot extends TimedRobot {
   public static Limelight limelight;
   public static Shooter shooter;
   public static WaterWheel waterWheel;
+  public static Elevator elevator;
 
   Command m_autonomousCommand;
   Command useLimelight;
   Command shoot;
   Command moveWaterWheel;
+  Command hang;
   CommandGroup auto;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -52,12 +54,14 @@ public class Robot extends TimedRobot {
     macanumDrive = new MacanumDrive();
     limelight = new Limelight();
     shooter = new Shooter();
+    elevator = new Elevator();
     //waterWheel = new WaterWheel();
     
     //commands
     useLimelight = new UseLimelight();
     shoot = new Shoot();
     auto = new Auto();
+    hang = new Hang();
   }
 
   /**
@@ -152,6 +156,11 @@ public class Robot extends TimedRobot {
     if(m_oi.getAuxillaryRawAxis(RobotMap.RIGHT_TRIGGER) > 0.1)
     {
       shoot.start();
+    }
+
+    if(m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_Y) > 0.1)
+    {
+      hang.start();
     }
 
   }
